@@ -57,7 +57,7 @@ audio.addEventListener('ended',function(){
 });
 
 window.addEventListener('load', async function(){
-    resp = await getSession("playlist");
+    resp = JSON.parse(await getSession("playlist"));
     var playingSingleTrack = await getSession("playingSingleTrack");
     playingSingleTrack = (playingSingleTrack === "true");
     if(playingSingleTrack){
@@ -82,7 +82,6 @@ window.addEventListener('load', async function(){
             setMutedPosition();
             setVolumeSliderPosition();
             setShuffleState();
-            resp = JSON.parse(resp);
             console.log(resp);
             playerPointer = getCookie("playerPointer");
             if(playerPointer == ""){playerPointer = 0;}

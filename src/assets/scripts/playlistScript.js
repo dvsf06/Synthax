@@ -92,8 +92,6 @@ function playPlaylist(){
     nameContainer.innerText = capitalizeFirstLetter(trackObj.titolo);
     artistContainer.innerText = trackObj.nome;
     coverContainer.src = coverLink;
-    playState="play";
-    changePlayState();
 
     setCookie("playerPointer", playerPointer);
     setSession("playlist", JSON.stringify(resp));
