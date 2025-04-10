@@ -1,0 +1,16 @@
+.form-control {
+    width: calc(96% - max(10%, 80px)) !important;
+    margin-right: 4%;
+    float: left;
+}
+
+.btn-search {
+    width: 10%;
+    min-width: 80px;
+}
+
+.center {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
