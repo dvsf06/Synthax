@@ -57,7 +57,9 @@ audio.addEventListener('ended',function(){
 });
 
 window.addEventListener('load', async function(){
-    resp = JSON.parse(await getSession("playlist"));
+    resp = (await getSession("playlist")).replace(/\\\\n/g, "").replace(/\\/g, "");
+    console.log(resp);
+    resp = JSON.parse(resp.substring(1, resp.length-1));
     var playingSingleTrack = await getSession("playingSingleTrack");
     playingSingleTrack = (playingSingleTrack === "true");
     if(playingSingleTrack){
