@@ -11,7 +11,7 @@ var volumeSlider = document.getElementById("volume-slider");
 var isPlaying;
 seekSlider.value = 0;
 var playerPointer;
-var resp;
+var playlistPlaying;
 var muted;
 var shuffle = true;
 
@@ -57,7 +57,9 @@ audio.addEventListener('ended',function(){
 });
 
 window.addEventListener('load', async function(){
-    resp = JSON.parse(await getSession("playlist"));
+    playlistPlaying = await getSession("playlist");
+    playlistPlaying = playlistPlaying.substring(1, playlistPlaying.length-1).replace(/\\/g, "");
+    console.log(playlistPlaying);
     var playingSingleTrack = await getSession("playingSingleTrack");
     playingSingleTrack = (playingSingleTrack === "true");
     if(playingSingleTrack){
@@ -72,7 +74,7 @@ window.addEventListener('load', async function(){
         setPlayState();
     }
     else{
-        if(resp == ""){
+        if(playlistPlaying == ""){
             console.log("No playlist on cue");
             muted = true;
             muteButton.innerHTML = '<i class="bi bi-volume-mute-fill h4"></i>';
@@ -82,7 +84,7 @@ window.addEventListener('load', async function(){
             setMutedPosition();
             setVolumeSliderPosition();
             setShuffleState();
-            console.log(resp);
+            playlistPlaying = JSON.parse(playlistPlaying);
             playerPointer = getCookie("playerPointer");
             if(playerPointer == ""){playerPointer = 0;}
             console.log(playerPointer);
@@ -97,7 +99,7 @@ window.addEventListener('load', async function(){
 })
 
 function playId(id){
-    var trackObj = resp[id];
+    var trackObj = playlistPlaying[id];
     console.log(trackObj);
     audioPath = trackObj["percorsoFile"];
     coverLink = trackObj["coverImage"];
@@ -138,7 +140,7 @@ shuffleButton.addEventListener('click', async () => {
         shuffleButton.innerHTML = '<i class="bi bi-shuffle h4"></i>';
         setShuffle(true);
     }
-    playPlaylist();
+    playPlst();
 });
 
 async function setShuffleState(){
@@ -157,13 +159,13 @@ async function setShuffle(willShuffle){
         return 0;
     }else{
         if(willShuffle){
-            shuffleArray(resp);
-            setSession("playlist", resp);
+            shuffleArray(playlistPlaying);
+            setSession("playlist", playlistPlaying);
             setSession("shuffled", true);
         }else{
-            plId = resp[0]["playlistId"];
-            resp = await makeGetPlaylistRequest("shared/actions/dataSource.php?getPlaylistTracks=1", plId);
-            setSession("playlist", resp);
+            plId = playlistPlaying[0]["playlistId"];
+            playlistPlaying = await makeGetPlaylistRequest("shared/actions/dataSource.php?getPlaylistTracks=1", plId);
+            setSession("playlist", playlistPlaying);
             setSession("shuffled", false);
         }
     }
@@ -312,10 +314,10 @@ async function makeSetSessionRequest(key, value){
     return data;
 }
 
-function playPlaylist(){
+function playPlst(){
     playerPointer = 0;
     setCookie("playerPointer", playerPointer);
-    var trackObj = resp[0];
+    var trackObj = playlistPlaying[0];
     audio.src = "../" + trackObj.percorsoFile;
     coverLink = trackObj["coverImage"];
     var coverContainer = document.getElementById("coverContainer");
