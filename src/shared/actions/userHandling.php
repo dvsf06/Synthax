@@ -11,7 +11,7 @@
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
             if($password != $passwordConf){
-                exit("Le password non coincidono");
+                exit('Le password non coincidono, <a href="../../registrazione.php">riprova</a>');
             }
 
             $query = $db->prepare("SELECT username FROM tblUtenti WHERE username = :username");
@@ -29,7 +29,7 @@
             $query->bindParam(":passwordHash", $passwordHash);
 
             $query->execute();
-            echo 'Utente inserito, <a href="../../index.php">accedi</a>';
+            header("Location: ../../index.php");
         }
         catch(PDOException $e) {
             echo "Error: " . $e->getMessage();
