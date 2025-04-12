@@ -3,6 +3,8 @@
     $host = "192.168.1.225";
     $port = 8000;
 
+    session_start();
+
     if(isset($_GET["createPlaylist"])){
         try{
             $query = $db->prepare("INSERT INTO tblPlaylists (nome, utenteId) VALUES (:nome, :utenteId)");
@@ -220,6 +222,37 @@
             $query -> bindParam(":idPlaylist", $idPlaylist);
             $query -> execute();
 
+            echo "200";
+        }
+        catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    if(isset($_GET["deleteAccount"])){
+        error_log("DELETE");
+        $idUtente = $_SESSION["idUtente"];
+        error_log("utente: " . $idUtente);
+
+        try{
+            $query  = $db -> prepare("SELECT idPlaylist FROM tblPlaylists WHERE utenteId = :utenteId");
+            $query -> bindParam(":utenteId", $idUtente);
+            $query -> execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($result as $playlist) {
+                $query = $db -> prepare("DELETE FROM tblBraniPlaylist WHERE playlistId = :idPlaylist");
+                $query -> bindParam(":idPlaylist", $playlist["idPlaylist"]);
+                $query -> execute();
+
+                $query = $db -> prepare("DELETE FROM tblPlaylists WHERE idPlaylist = :idPlaylist");
+                $query -> bindParam(":idPlaylist", $playlist["idPlaylist"]);
+                $query -> execute();
+            }
+
+            $query = $db -> prepare("DELETE FROM tblUtenti WHERE idUtente = :idUtente");
+            $query -> bindParam(":idUtente", $idUtente);
+            $query -> execute();
             echo "200";
         }
         catch (PDOException $e){

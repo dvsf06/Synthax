@@ -23,6 +23,11 @@ body {
     height: max(20vw, 250px);
 }
 
+.btn-delete-account{
+    color: #ffffff !important;
+    margin-left: 3px;
+}
+
 .formCenter button {
     background-color: #4d5497 !important;
     border: 0 !important;

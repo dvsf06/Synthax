@@ -18,8 +18,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 
-    <link rel="stylesheet" href="assets/cardStyle.css">
     <link rel="stylesheet" href="assets/playerStyle.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -40,7 +40,26 @@
                 <input type="email" class="form-control" id="emailInput" name="email" placeholder="<?php echo($_SESSION["email"]); ?>" disabled>
             </div>
             <button class="btn btn-danger" onclick="logoutClick()">Logout</button>
-            <button class="btn btn-primary" onclick="toggleLightModeClick()">Toggle dark mode</a>
+            <button class="btn btn-primary" onclick="toggleLightModeClick()">Attiva dark mode</a>
+            <button type="button" class="btn btn-delete-account" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                Elimina account
+            </button>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" id="modalDelete" data-bs-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Elimina account<h5>
+                </div>
+                <div class="modal-body">
+                    Sei veramente sicuro di voler eliminare l'account? L'azione è <span class="fw-bold">irreversibile.</span><br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteAccountClick()">Elimina</button>
+                </div>
+            </div>
         </div>
     </div>
     <script src="assets/scripts/accountScript.js"></script>
