@@ -14,7 +14,7 @@ false = False
 
 def api_auth():
     CLIENT_ID = "7830ddbbbf3043a6a3ebab4273d26205"
-    CLIENT_SECRET = "4d97877ff89b42aab9679e09c32fb8b8"
+    CLIENT_SECRET = "c5f048c8ae3c491e90d445b178d6274a"
     auth_url = "https://accounts.spotify.com/api/token"
     auth_payload = {
         "grant_type": "client_credentials",
