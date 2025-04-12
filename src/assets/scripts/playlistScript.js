@@ -80,9 +80,10 @@ function playTrack(element){
 }
 
 function playPlaylist(){
+    playingPlaylist = resp;
     setSession("playingSingleTrack", false);
     playerPointer = 0;
-    var trackObj = resp[0];
+    var trackObj = playingPlaylist[0];
     audio = document.querySelector("audio");
     audio.src = "../" + trackObj.percorsoFile;
     coverLink = trackObj["coverImage"];
@@ -94,7 +95,7 @@ function playPlaylist(){
     coverContainer.src = coverLink;
 
     setCookie("playerPointer", playerPointer);
-    setSession("playlist", JSON.stringify(resp));
+    setSession("playlist", JSON.stringify(playingPlaylist));
 
     audio.play();
 }
