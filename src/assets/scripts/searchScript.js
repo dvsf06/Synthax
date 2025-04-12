@@ -115,17 +115,18 @@ function getCookie(cname) {
 
 function playTrack(element){
     var track = decodeURIComponent(element);
-    trackObj = JSON.parse(track);
-    audioPath = trackObj["audioPath"];
+    var trackObj = JSON.parse(track);
+    audioPath = trackObj["percorsoFile"];
     coverLink = trackObj["coverImage"];
     audio = document.querySelector("audio");
     var coverContainer = document.getElementById("coverContainer");
     var nameContainer = document.getElementById("trackNameContainer");
     var artistContainer = document.getElementById("artistNameContainer");
-    nameContainer.innerText = trackObj["name"];
-    artistContainer.innerText = trackObj["artists"][0]["name"];
+    nameContainer.innerText = trackObj.titolo;
+    artistContainer.innerText = trackObj.nome;
     coverContainer.src = coverLink;
     audio.src = "../" + audioPath;
+    playState="play";
     if(!isPlaying){playClick()}
     setSession("playingSingleTrack", true);
     setSession("track", element);
