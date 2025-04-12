@@ -29,15 +29,11 @@
     <?php include 'shared/navbar.php'?>
     <form class="formCenter">
         <div class="mb-3">
-            <label for="coverFileInput" class="form-label">Copertina playlist</label>
-            <input class="form-control" type="file" id="coverFileInput">
-        </div>
-        <div class="mb-3">
             <label for="nameInput" class="form-label">Nome</label>
             <input type="text" class="form-control" id="nameInput" name="name" placeholder="Nome playlist">
         </div>
-            <button type="button" class="btn btn-danger">Annulla</button>
             <button type="button" class="btn btn-primary" onclick="creaClick()">Crea</button>
+            <a type="button" href="libreria.php" class="btn">Annulla</a>
         </form>
     <?php include 'shared/footer.php'?>
     <script src="assets/scripts/creaPlScript.js"></script>
