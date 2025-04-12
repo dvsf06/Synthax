@@ -140,7 +140,7 @@ shuffleButton.addEventListener('click', async () => {
         shuffleButton.innerHTML = '<i class="bi bi-shuffle h4"></i>';
         setShuffle(true);
     }
-    playPlaylist();
+    playPlst();
 });
 
 async function setShuffleState(){
@@ -314,7 +314,7 @@ async function makeSetSessionRequest(key, value){
     return data;
 }
 
-function playPlaylist(){
+function playPlst(){
     playerPointer = 0;
     setCookie("playerPointer", playerPointer);
     var trackObj = playingPlaylist[0];
