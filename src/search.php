@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cerca</title>
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon1.ico">
 
     <link rel="stylesheet" href="assets/playerStyle.css">
     <link rel="stylesheet" href="assets/styleSearch.css">
